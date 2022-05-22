@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const PartCard = ({ part }) => {
-  const { id, image, name, description, price, quantity } = part;
+  const { _id, image, name, description, price, quantity } = part;
 
   const navigate = useNavigate();
   return (
@@ -11,7 +11,7 @@ const PartCard = ({ part }) => {
         <article className="overflow-hidden rounded-lg shadow-lg">
           <figure>
             <img
-              onClick={() => navigate(id)}
+              onClick={() => navigate(_id)}
               alt={name}
               className="block h-auto w-full cursor-pointer"
               src={image}
@@ -20,7 +20,7 @@ const PartCard = ({ part }) => {
 
           <header className=" leading-tight p-4">
             <h1
-              onClick={() => navigate(id)}
+              onClick={() => navigate(_id)}
               className="text-lg capitalize no-underline hover:underline  font-bold cursor-pointer"
             >
               {name}
@@ -44,7 +44,7 @@ const PartCard = ({ part }) => {
           </footer>
 
           <button
-            onClick={() => navigate(id)}
+            onClick={() => navigate(_id)}
             className="btn btn-primary text-white px-12 mb-4 block mx-auto"
           >
             Pre Order

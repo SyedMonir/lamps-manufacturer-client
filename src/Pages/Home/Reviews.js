@@ -17,7 +17,7 @@ import { Autoplay, FreeMode, Pagination, Navigation } from 'swiper';
 
 const Reviews = () => {
   return (
-    <div className="my-12 mx-10">
+    <div className="my-12 pt-8 mx-10 border-t">
       <h1 className="uppercase text-center text-3xl font-bold">
         Reviews
         <br />

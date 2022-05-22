@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const MiniBlog = () => {
   return (
     <>
-      <section className="text-gray-600 body-font mt-20">
+      <section className="text-gray-600 body-font mt-16 pt-10 border-t">
         <h1 className="uppercase text-center text-3xl font-bold">
           Blogs
           <br />

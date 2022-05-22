@@ -3,6 +3,7 @@ import Banner from './Banner';
 import Contact from './Contact';
 import FeaturedParts from './FeaturedParts';
 import MiniBlog from './MiniBlog';
+import Newsletter from './Newsletter';
 import Reviews from './Reviews';
 import Summery from './Summery';
 
@@ -15,6 +16,7 @@ const Home = () => {
       <Reviews />
       <MiniBlog />
       <Contact />
+      <Newsletter />
     </>
   );
 };
