@@ -3,7 +3,7 @@ import chittagong from '../../assets/image/chittagong.jpg';
 
 const Contact = () => {
   return (
-    <section className="text-gray-600 body-font relative mt-16">
+    <section className="text-gray-600 body-font relative mt-4">
       <h1 className="uppercase text-center text-3xl font-bold mt-2 ">
         Office Contacts
         <br />
