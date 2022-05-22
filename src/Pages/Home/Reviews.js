@@ -18,16 +18,14 @@ import { Autoplay, FreeMode, Pagination, Navigation } from 'swiper';
 const Reviews = () => {
   return (
     <div className="my-12 mx-10">
-      <div>
-        <h1 className="uppercase text-center text-3xl font-bold">
-          Reviews
-          <br />
-          <span className="capitalize  tracking-widest text-primary text-lg font-medium">
-            People say about us !
-          </span>
-          <span className="w-4 border-b-2 "></span>
-        </h1>
-      </div>{' '}
+      <h1 className="uppercase text-center text-3xl font-bold">
+        Reviews
+        <br />
+        <span className="capitalize  tracking-widest text-primary text-lg font-medium">
+          People say about us !
+        </span>
+        <span className="w-4 border-b-2 "></span>
+      </h1>
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
