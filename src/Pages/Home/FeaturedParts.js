@@ -18,7 +18,8 @@ const FeaturedParts = () => {
           <span className="capitalize  tracking-widest text-primary text-base font-medium">
             (Click on the image to view more details)
           </span>
-          <span className="w-4 border-b-2 "></span>
+          <br />
+          <span className="inline-block w-20 border-b-2 border-primary "></span>
         </h1>
         <div className="flex flex-wrap -mx-1 lg:-mx-4">
           {/*  Card  */}

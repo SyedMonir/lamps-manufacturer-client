@@ -24,7 +24,8 @@ const Reviews = () => {
         <span className="capitalize  tracking-widest text-primary text-lg font-medium">
           People say about us !
         </span>
-        <span className="w-4 border-b-2 "></span>
+        <br />
+        <span className="inline-block w-20 border-b-2 border-primary "></span>
       </h1>
       <Swiper
         slidesPerView={1}
