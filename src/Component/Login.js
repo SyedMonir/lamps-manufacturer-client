@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../firebase.init';
 import login from '../assets/image/login.jpg';
 import Spinner from './Spinner';
@@ -14,6 +14,10 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+
   // Show Password
   const [eye, setEye] = useState(false);
 
@@ -39,12 +43,20 @@ const Login = () => {
 
   // Handle Submit
   const onSubmit = async (data) => {
-    await signInWithEmailAndPassword(data.email, data.password);
-    await toast.success(`Successfully Login ${data.email}`, {
+    signInWithEmailAndPassword(data.email, data.password);
+    toast.success(`Successfully Login ${data.email}`, {
       theme: 'colored',
     });
     reset();
   };
+
+  // Redirect
+
+  useEffect(() => {
+    if (user?.user) {
+      navigate(from, { replace: true });
+    }
+  }, [from, user, navigate]);
 
   const resetPassword = async () => {
     if (watch('email')) {
@@ -67,6 +79,7 @@ const Login = () => {
     //     theme: 'colored',
     //   });
   }
+
   return (
     <>
       <div className="lg:flex py-4 px-12">

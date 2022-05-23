@@ -33,7 +33,7 @@ const PartCard = ({ part }) => {
             </p>
           </header>
           <p className=" px-4">
-            Available Quantity:{' '}
+            Available Stock:{' '}
             <span className="text-primary font-semibold text-xl">
               {quantity}
             </span>

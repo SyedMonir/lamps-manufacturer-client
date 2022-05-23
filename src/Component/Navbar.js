@@ -3,9 +3,30 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AiOutlineMenuUnfold } from 'react-icons/ai';
 import { MdDashboard } from 'react-icons/md';
 import './style.css';
+import Spinner from './Spinner';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../firebase.init';
+import { signOut } from 'firebase/auth';
 
 const Navbar = ({ children }) => {
   const { pathname } = useLocation();
+  const [user, loading, error] = useAuthState(auth);
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    console.log(error);
+  }
+
+  if (user) {
+    console.log(user?.user);
+  }
+
+  const handleSignOut = () => {
+    signOut(auth);
+  };
 
   const menuItems = (
     <>
@@ -25,22 +46,30 @@ const Navbar = ({ children }) => {
           Dashboard
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/signup"
-          className={({ isActive }) => (isActive ? 'active-link' : 'link')}
-        >
-          Signup
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/login"
-          className={({ isActive }) => (isActive ? 'active-link' : 'link')}
-        >
-          Login
-        </NavLink>
-      </li>
+      {auth?.currentUser ? (
+        <button onClick={handleSignOut} className="link">
+          Sign out
+        </button>
+      ) : (
+        <>
+          <li>
+            <NavLink
+              to="/signup"
+              className={({ isActive }) => (isActive ? 'active-link' : 'link')}
+            >
+              Signup
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/login"
+              className={({ isActive }) => (isActive ? 'active-link' : 'link')}
+            >
+              Login
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
