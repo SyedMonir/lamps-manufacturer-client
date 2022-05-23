@@ -33,6 +33,14 @@ const Navbar = ({ children }) => {
           Signup
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/login"
+          className={({ isActive }) => (isActive ? 'active-link' : 'link')}
+        >
+          Login
+        </NavLink>
+      </li>
     </>
   );
   return (

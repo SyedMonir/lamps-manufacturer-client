@@ -1,80 +1,75 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import {
+  useSendPasswordResetEmail,
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import signup from '../assets/image/signup.jpg';
-import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
-import { FcGoogle } from 'react-icons/fc';
-import {
-  useCreateUserWithEmailAndPassword,
-  useSendEmailVerification,
-  useSignInWithGoogle,
-  useUpdateProfile,
-} from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
+import login from '../assets/image/login.jpg';
 import Spinner from './Spinner';
-import { fetcher } from '../api';
+import { FcGoogle } from 'react-icons/fc';
+import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
+import { toast } from 'react-toastify';
 
-const Signup = () => {
+const Login = () => {
   // Show Password
   const [eye, setEye] = useState(false);
 
   // Google
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
-  // Create User
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+  // Sign In
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
 
-  // Update Profile
-  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-
-  // Email Verification
-  const [sendEmailVerification, sending, verificationError] =
-    useSendEmailVerification(auth);
+  // Reset Password
+  const [sendPasswordResetEmail, sending, resetError] =
+    useSendPasswordResetEmail(auth);
 
   // Form
   const {
     register,
     formState: { errors },
     handleSubmit,
+    watch,
     reset,
   } = useForm();
 
   // Handle Submit
   const onSubmit = async (data) => {
-    await createUserWithEmailAndPassword(data.email, data.password);
-    await updateProfile({ displayName: data.name });
-    await sendEmailVerification();
-
+    await signInWithEmailAndPassword(data.email, data.password);
+    await toast.success(`Successfully Login ${data.email}`, {
+      theme: 'colored',
+    });
     reset();
   };
 
-  // Updating to db
-  useEffect(() => {
-    const userData = {
-      email: user?.user?.email || gUser?.user?.email,
-      userName: user?.user.displayName || gUser?.user.displayName,
-      avatar: user?.user.photoURL || gUser?.user.photoURL,
-      role: 'user',
-    };
+  const resetPassword = async () => {
+    if (watch('email')) {
+      await sendPasswordResetEmail(watch('email'));
+    } else {
+      toast.error('Please enter email', {
+        theme: 'colored',
+      });
+    }
+  };
 
-    fetcher.put(`user/${user?.user?.email}`, userData);
-  }, []);
-
-  if (loading || gLoading || updating || sending) {
+  if (loading || gLoading || sending) {
     return <Spinner />;
   }
 
+  if (user?.user || gUser?.user) {
+    // console.log(user?.user);
+    // console.log(gUser?.user);
+    // toast.success(`Email sent successfully at ${watch('email')}`, {
+    //     theme: 'colored',
+    //   });
+  }
   return (
     <>
       <div className="lg:flex py-4 px-12">
-        {/* Illustration */}
-        <div className="hidden lg:w-1/2 lg:flex items-center justify-center bg-primary flex-1 h-full">
-          <div className="max-w-md transform duration-200 hover:scale-110 delay-200 ease-in-out ">
-            <img src={signup} alt="signup" />
-          </div>
-        </div>
-        {/*  */}
         <div className="lg:w-1/2 xl:max-w-screen-sm h-full border">
           <div className="py-12 bg-indigo-100 lg:bg-white flex flex-col justify-center lg:px-12 border-b">
             <div className="cursor-pointer flex items-center flex-col ">
@@ -83,7 +78,7 @@ const Signup = () => {
               </h1>
 
               <h2 className="text-center mx-auto text-4xl text-primary font-display font-semibold lg:text-left xl:text-5xl xl:text-bold">
-                Signup
+                Login
               </h2>
             </div>
           </div>
@@ -110,24 +105,6 @@ const Signup = () => {
             </div>
             <div className="mt-12">
               <form onSubmit={handleSubmit(onSubmit)}>
-                {/* Name */}
-                <div>
-                  <div className="text-sm font-bold text-gray-700 tracking-wide">
-                    Name
-                  </div>
-                  <input
-                    className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-primary"
-                    type="text"
-                    placeholder="enter your name"
-                    {...register('name', { required: true })}
-                  />
-                  <span className="text-red-600 text-sm">
-                    {errors.name?.type === 'required' && '*Name is required'}
-                  </span>
-                  <span className="text-red-600 text-base block text-center mt-1">
-                    {updateError && <small>{updateError?.message}</small>}
-                  </span>
-                </div>
                 {/* Email */}
                 <div className="mt-8">
                   <div className="text-sm font-bold text-gray-700 tracking-wide">
@@ -139,13 +116,10 @@ const Signup = () => {
                     placeholder="unknown@exapmle.com"
                     {...register('email', {
                       required: true,
-                      pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
                     })}
                   />
                   <span className="text-red-600 text-sm">
                     {errors.email?.type === 'required' && '*Email is required'}
-                    {errors.email?.type === 'pattern' &&
-                      'Email should be like unknown@exapmle.com'}
                   </span>
                 </div>
                 {/* Password */}
@@ -154,7 +128,18 @@ const Signup = () => {
                     <div className="text-sm font-bold text-gray-700 tracking-wide">
                       Password
                     </div>
+                    <div>
+                      <button
+                        onClick={resetPassword}
+                        className="text-xs font-display font-semibold text-primary hover:text-indigo-900 cursor-pointer"
+                      >
+                        Forgot Password?
+                      </button>
+                    </div>
                   </div>
+                  <span className="text-red-600 text-base block text-center mt-1">
+                    {resetError && <small>{resetError?.message}</small>}
+                  </span>
                   <div className="relative">
                     <input
                       className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-primary"
@@ -177,32 +162,33 @@ const Signup = () => {
                 <span className="text-red-600 text-base block text-center mt-1">
                   {error && <small>{error?.message}</small>}
                 </span>
-                <span className="text-red-600 text-base block text-center mt-1">
-                  {verificationError && (
-                    <small>{verificationError?.message}</small>
-                  )}
-                </span>
                 {/* Submit Button */}
                 <div className="mt-10">
                   <button
                     type="submit"
                     className="bg-primary text-gray-100 p-4 w-full rounded-full tracking-wide font-semibold font-display focus:outline-none focus:shadow-outline hover:shadow-lg"
                   >
-                    Signup
+                    Login
                   </button>
                 </div>
               </form>
               {/* Navigate To Login */}
               <div className="mt-8 mb-4 text-sm font-display font-semibold text-gray-700 text-center">
-                Already have an account ?{' '}
+                Don't have an account ?{' '}
                 <Link
-                  to={'/login'}
+                  to={'/signup'}
                   className="cursor-pointer text-primary hover:text-indigo-900"
                 >
-                  Login
+                  Signup
                 </Link>
               </div>
             </div>
+          </div>
+        </div>
+        {/* Illustration */}
+        <div className="hidden lg:w-1/2 lg:flex items-center justify-center bg-primary flex-1 h-full">
+          <div className="max-w-md transform duration-200 hover:scale-110 delay-200 ease-in-out ">
+            <img src={login} alt="signup" />
           </div>
         </div>
       </div>
@@ -210,4 +196,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
