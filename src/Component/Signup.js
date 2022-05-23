@@ -4,39 +4,66 @@ import { Link } from 'react-router-dom';
 import signup from '../assets/image/signup.jpg';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import {
+  useCreateUserWithEmailAndPassword,
+  useSendEmailVerification,
+  useSignInWithGoogle,
+  useUpdateProfile,
+} from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
 import Spinner from './Spinner';
+import { fetcher } from '../api';
 
 const Signup = () => {
   // Show Password
   const [eye, setEye] = useState(false);
 
   // Google
-  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
+  // Create User
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  // Update Profile
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+  // Email Verification
+  const [sendEmailVerification, sending, verificationError] =
+    useSendEmailVerification(auth);
 
   // Form
   const {
     register,
     formState: { errors },
     handleSubmit,
-    watch,
     reset,
   } = useForm();
 
   // Handle Submit
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log(watch('email'));
+  const onSubmit = async (data) => {
+    // console.log(watch('email'));
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+    await sendEmailVerification();
 
     reset();
   };
 
-  if (loading) {
+  if (loading || gLoading || updating || sending) {
     return <Spinner />;
   }
-  if (user) {
-    console.log(user);
+  if (user?.user || gUser?.user) {
+    // console.log(user?.user);
+    // console.log(gUser?.user);
+    const userData = {
+      email: user?.user?.email || gUser?.user?.email,
+      userName: user?.user.displayName || gUser?.user.displayName,
+      avatar: user?.user.photoURL || gUser?.user.photoURL,
+      role: 'user',
+    };
+
+    fetcher.put(`user/${user?.user?.email}`, userData);
   }
 
   return (
@@ -67,7 +94,7 @@ const Signup = () => {
               </button>
             </div>
             <span className="text-red-600 text-base block text-center mt-1">
-              {error && <small>{error?.message}</small>}
+              {gError && <small>{gError?.message}</small>}
             </span>
 
             <div className="mb-4 mt-4 border-b text-center">
@@ -90,6 +117,9 @@ const Signup = () => {
                   />
                   <span className="text-red-600 text-sm">
                     {errors.name?.type === 'required' && '*Name is required'}
+                  </span>
+                  <span className="text-red-600 text-base block text-center mt-1">
+                    {updateError && <small>{updateError?.message}</small>}
                   </span>
                 </div>
                 {/* Email */}
@@ -146,6 +176,14 @@ const Signup = () => {
                       '*Password is required'}
                   </span>
                 </div>
+                <span className="text-red-600 text-base block text-center mt-1">
+                  {error && <small>{error?.message}</small>}
+                </span>
+                <span className="text-red-600 text-base block text-center mt-1">
+                  {verificationError && (
+                    <small>{verificationError?.message}</small>
+                  )}
+                </span>
                 {/* Submit Button */}
                 <div className="mt-10">
                   <button
