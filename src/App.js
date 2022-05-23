@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Footer from './Component/Footer';
 import Navbar from './Component/Navbar';
+import Signup from './Component/Signup';
 import Home from './Pages/Home/Home';
 import Part from './Pages/Part/Part';
 
@@ -10,7 +11,8 @@ function App() {
       <Navbar>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/:partID" element={<Part />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/inventory/:partID" element={<Part />} />
           <Route path="*" element={<Home />} />
         </Routes>
         <Footer />

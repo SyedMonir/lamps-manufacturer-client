@@ -27,10 +27,10 @@ const Navbar = ({ children }) => {
       </li>
       <li>
         <NavLink
-          to="/login"
+          to="/signup"
           className={({ isActive }) => (isActive ? 'active-link' : 'link')}
         >
-          Login
+          Signup
         </NavLink>
       </li>
     </>
