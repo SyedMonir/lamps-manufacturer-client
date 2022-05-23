@@ -5,9 +5,9 @@ import Login from './Component/Login';
 import Navbar from './Component/Navbar';
 import Signup from './Component/Signup';
 import Home from './Pages/Home/Home';
-import Part from './Pages/Part/Part';
 import 'react-toastify/dist/ReactToastify.css';
 import RequireAuth from './Component/RequireAuth';
+import PartPurchase from './Pages/Part/PartPurchase';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
             path="/inventory/:partID"
             element={
               <RequireAuth>
-                <Part />
+                <PartPurchase />
               </RequireAuth>
             }
           />

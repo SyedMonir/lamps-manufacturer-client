@@ -21,7 +21,7 @@ const Navbar = ({ children }) => {
   }
 
   if (user) {
-    console.log(user?.user);
+    // console.log(user?.user);
   }
 
   const handleSignOut = () => {
