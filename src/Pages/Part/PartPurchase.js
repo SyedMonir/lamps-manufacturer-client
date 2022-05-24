@@ -3,12 +3,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { fetcher } from '../../api';
 import Spinner from '../../Component/Spinner';
 import auth from '../../firebase.init';
 
 const PartPurchase = () => {
   const { partID } = useParams();
+  const [fetching, setFetching] = React.useState(false);
 
   const [user, loading, authError] = useAuthState(auth);
   //   console.log(user);
@@ -17,6 +19,7 @@ const PartPurchase = () => {
     isLoading,
     error,
     data: part,
+    refetch,
   } = useQuery(['part', partID], async () => {
     return await fetcher.get(`parts/${partID}`);
   });
@@ -29,24 +32,11 @@ const PartPurchase = () => {
     reset,
   } = useForm();
 
-  //   useEffect(() => {
-  //     fetch(`http://localhost:5000/user/${user?.email}`)
-  //       .then((res) => res.json())
-  //       .then((data) => console.log(data));
-  //   }, [user?.email]);
-
-  if (loading) {
-    return <Spinner />;
-  }
-
   if (authError) {
     console.log(authError);
   }
 
-  //   const data = fetcher.get(`/user/${user.email}`);
-  //   console.log(data);
-
-  if (isLoading) {
+  if (isLoading || fetching || loading) {
     return <Spinner />;
   }
 
@@ -56,14 +46,45 @@ const PartPurchase = () => {
 
   // Handle Purchase
   const onSubmit = async (data) => {
-    console.log(data);
-    if (data?.quantity > part?.data.quantity) {
-      alert('Not enough parts in stock');
-    }
-    // const { data } = await fetcher.post(`/user/${user.email}/purchase`, {
-    //   partID,
-    // });
+    // console.log(data);
 
+    if (parseInt(data?.quantity) > parseInt(part?.data.quantity)) {
+      toast.error('Not enough parts in stock!', {
+        theme: 'colored',
+      });
+      return;
+    }
+    if (parseInt(data?.quantity) < 100) {
+      toast.info('Maximum 100+ order acceptable!', {
+        theme: 'colored',
+      });
+      return;
+    }
+    setFetching(true);
+    const purchase = {
+      email: user?.email,
+      name: user?.displayName,
+      partName: part?.data.name,
+      partID: partID,
+      address: data.address,
+      phone: data.phone,
+      quantity: parseInt(data.quantity),
+      paid: false,
+    };
+    // console.log(purchase);
+
+    const result = await fetcher.post('/purchase', purchase);
+
+    setFetching(false);
+    if (result?.status === 200) {
+      const updatedQuantity =
+        parseInt(part?.data.quantity) - parseInt(data.quantity);
+      await fetcher.put(`/parts/${partID}`, { updatedQuantity });
+      refetch();
+      toast.success('Purchase successful!', {
+        theme: 'colored',
+      });
+    }
     reset();
   };
 
@@ -88,13 +109,6 @@ const PartPurchase = () => {
               <h1 className="text-gray-900 text-2xl title-font font-medium mb-1">
                 {part?.data.name}
               </h1>
-              {/* <div className="flex mb-4">
-                <span className="flex items-center">
-                  <Link to={'/'} className="text-gray-600 hover:underline">
-                    4 Reviews
-                  </Link>
-                </span>
-              </div> */}
               <p className="leading-relaxed pb-2 border-b-2">
                 {part?.data.description}
               </p>
@@ -113,12 +127,52 @@ const PartPurchase = () => {
                     <span className="text-primary text-3xl font-bold">
                       {part?.data.price}
                     </span>{' '}
-                    / Per-Part
+                    / Per-Unit
                   </span>
                 </div>
               </div>
               {/* Form */}
               <form onSubmit={handleSubmit(onSubmit)}>
+                {/* Address */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text">Address:</span>
+                  </label>
+                  <textarea
+                    className="textarea textarea-bordered"
+                    placeholder="Your address"
+                    {...register('address', {
+                      required: true,
+                    })}
+                  ></textarea>
+                  <label className="label">
+                    <span className="label-text-alt mx-auto text-red-600 text-sm">
+                      {errors.address?.type === 'required' &&
+                        '*Address is required'}
+                    </span>
+                  </label>
+                </div>
+                {/* Phone */}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text">Phone:</span>
+                  </label>
+                  <input
+                    type="number"
+                    className="textarea textarea-bordered"
+                    placeholder="Your number"
+                    {...register('phone', {
+                      required: true,
+                    })}
+                  />
+                  <label className="label">
+                    <span className="label-text-alt mx-auto text-red-600 text-sm">
+                      {errors.phone?.type === 'required' &&
+                        '*Phone is required'}
+                    </span>
+                  </label>
+                </div>
+                {/* Quantity */}
                 <div className="form-control w-full  mb-4">
                   <label className="label">
                     <span className="label-text">Quantity:</span>
@@ -132,18 +186,12 @@ const PartPurchase = () => {
                     className="input input-bordered w-full "
                     {...register('quantity', {
                       required: true,
-                      //   min: 100,
-                      //   max: part?.data.quantity,
                     })}
                   />
                   <label className="label">
                     <span className="label-text-alt mx-auto text-red-600 text-sm">
                       {errors.quantity?.type === 'required' &&
                         '*Quantity is required'}
-                      {errors.min?.type === 'required' &&
-                        '*Minimum 100+ Order Acceptable'}
-                      {errors.max?.type === 'required' &&
-                        '*Insufficient Quantity'}
                     </span>
                   </label>
                 </div>
@@ -152,7 +200,7 @@ const PartPurchase = () => {
                     type="submit"
                     className="flex text-white bg-primary border-0 py-2 px-8 focus:outline-none hover:shadow-lg rounded"
                   >
-                    Go to purchases
+                    Go to Purchases
                   </button>
                 </div>
               </form>

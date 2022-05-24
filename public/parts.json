@@ -3,42 +3,42 @@
     "name": "ARMS - LAMP AND CHANDELIER ARMS",
     "image": "https://i.ibb.co/PQt9RWx/user-2.jpg",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.",
-    "price": "20",
-    "quantity": "1000"
+    "price": 45,
+    "quantity": 11000
   },
   {
     "name": "BACK PLATES - SCONCE PLATES",
     "image": "https://i.ibb.co/PQt9RWx/user-2.jpg",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.",
-    "price": "20",
-    "quantity": "1000"
+    "price": 45,
+    "quantity": 1000
   },
   {
     "name": "BALLS - SOLID AND MULTI-PART BALLS",
     "image": "https://i.ibb.co/PQt9RWx/user-2.jpg",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.",
-    "price": "20",
-    "quantity": "1000"
+    "price": 45,
+    "quantity": 12000
   },
   {
     "name": "BANDING - PLAIN AND DECORATIVE",
     "image": "https://i.ibb.co/PQt9RWx/user-2.jpg",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.",
-    "price": "20",
-    "quantity": "1000"
+    "price": 45,
+    "quantity": 31000
   },
   {
     "name": "BASES - TABLE AND FLOOR LAMP",
     "image": "https://i.ibb.co/PQt9RWx/user-2.jpg",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.",
-    "price": "20",
-    "quantity": "1000"
+    "price": 45,
+    "quantity": 61000
   },
   {
     "name": "BOBECHES - METAL, AND PORCELAIN",
     "image": "https://i.ibb.co/PQt9RWx/user-2.jpg",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.",
-    "price": "20",
-    "quantity": "1000"
+    "price": 45,
+    "quantity": 31000
   }
 ]
