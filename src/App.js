@@ -10,6 +10,8 @@ import RequireAuth from './Component/RequireAuth';
 import PartPurchase from './Pages/Part/PartPurchase';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import MyOrders from './Pages/Dashboard/MyOrders';
+import AddReview from './Pages/Dashboard/AddReview';
+import MyProfile from './Pages/Dashboard/MyProfile';
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
           >
             {/* <Route index element={< />} /> */}
             <Route path="my_orders" element={<MyOrders />} />
+            <Route path="addReview" element={<AddReview />} />
+            <Route path="myProfile" element={<MyProfile />} />
           </Route>
           <Route path="*" element={<Home />} />
         </Routes>
