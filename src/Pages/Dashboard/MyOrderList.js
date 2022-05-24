@@ -1,9 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { fetcher } from '../../api';
 
 const MyOrderList = ({ order, index, refetch }) => {
   const { _id, address, partName, phone, quantity, paid } = order;
+  const navigate = useNavigate();
 
   const handleDelete = () => {
     Swal.fire({
@@ -35,7 +37,12 @@ const MyOrderList = ({ order, index, refetch }) => {
         {paid ? (
           <span className="text-success uppercase font-semibold">Paid</span>
         ) : (
-          <button className="btn text-white btn-xs btn-success">Pay Now</button>
+          <button
+            onClick={() => navigate(`payment/${_id}`)}
+            className="btn text-white btn-xs btn-success"
+          >
+            Pay Now
+          </button>
         )}
       </td>
       <td>

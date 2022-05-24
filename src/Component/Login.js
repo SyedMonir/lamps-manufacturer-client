@@ -75,7 +75,7 @@ const Login = () => {
   }
 
   if (user?.user || gUser?.user) {
-    console.log(user);
+    // console.log(user);
     // console.log(gUser?.user);
     // toast.success(`Email sent successfully at ${watch('email')}`, {
     //     theme: 'colored',

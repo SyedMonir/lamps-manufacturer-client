@@ -23,6 +23,8 @@ const PartPurchase = () => {
     return await fetcher.get(`parts/${partID}`);
   });
 
+  // console.log(part);
+
   // Form
   const {
     register,
@@ -68,9 +70,10 @@ const PartPurchase = () => {
       address: data.address,
       phone: data.phone,
       quantity: parseInt(data.quantity),
+      price: part?.data.price,
       paid: false,
     };
-    // console.log(purchase);
+    console.log(purchase);
 
     const result = await fetcher.post('/purchase', purchase);
 

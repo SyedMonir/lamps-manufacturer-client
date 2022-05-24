@@ -12,6 +12,7 @@ import Dashboard from './Pages/Dashboard/Dashboard';
 import MyOrders from './Pages/Dashboard/MyOrders';
 import AddReview from './Pages/Dashboard/AddReview';
 import MyProfile from './Pages/Dashboard/MyProfile';
+import Payment from './Pages/Dashboard/Payment';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           >
             {/* <Route index element={< />} /> */}
             <Route path="my_orders" element={<MyOrders />} />
+            <Route path="my_orders/payment/:id" element={<Payment />} />
             <Route path="addReview" element={<AddReview />} />
             <Route path="myProfile" element={<MyProfile />} />
           </Route>
