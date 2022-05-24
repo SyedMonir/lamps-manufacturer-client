@@ -53,10 +53,10 @@ const Login = () => {
   // Redirect
 
   useEffect(() => {
-    if (user?.user) {
+    if (user?.user || gUser?.user) {
       navigate(from, { replace: true });
     }
-  }, [from, user, navigate]);
+  }, [from, user, gUser, navigate]);
 
   const resetPassword = async () => {
     if (watch('email')) {
