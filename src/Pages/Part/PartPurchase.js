@@ -19,7 +19,6 @@ const PartPurchase = () => {
     isLoading,
     error,
     data: part,
-    refetch,
   } = useQuery(['part', partID], async () => {
     return await fetcher.get(`parts/${partID}`);
   });
@@ -77,10 +76,9 @@ const PartPurchase = () => {
 
     setFetching(false);
     if (result?.status === 200) {
-      const updatedQuantity =
-        parseInt(part?.data.quantity) - parseInt(data.quantity);
-      await fetcher.put(`/parts/${partID}`, { updatedQuantity });
-      refetch();
+      // const updatedQuantity =
+      //   parseInt(part?.data.quantity) - parseInt(data.quantity);
+      // await fetcher.put(`/parts/${partID}`, { updatedQuantity });
       toast.success('Purchase successful!', {
         theme: 'colored',
       });
@@ -187,6 +185,7 @@ const PartPurchase = () => {
                     {...register('quantity', {
                       required: true,
                     })}
+                    defaultValue={100}
                   />
                   <label className="label">
                     <span className="label-text-alt mx-auto text-red-600 text-sm">

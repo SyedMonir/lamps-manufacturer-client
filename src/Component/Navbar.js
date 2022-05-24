@@ -47,9 +47,9 @@ const Navbar = ({ children }) => {
         </NavLink>
       </li>
       {auth?.currentUser ? (
-        <button onClick={handleSignOut} className="link">
+        <span onClick={handleSignOut} className="link">
           Sign out
-        </button>
+        </span>
       ) : (
         <>
           <li>

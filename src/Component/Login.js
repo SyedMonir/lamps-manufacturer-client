@@ -44,10 +44,12 @@ const Login = () => {
   // Handle Submit
   const onSubmit = async (data) => {
     signInWithEmailAndPassword(data.email, data.password);
-    toast.success(`Successfully Login ${data.email}`, {
-      theme: 'colored',
-    });
-    reset();
+    if (user?.user || gUser?.user) {
+      toast.success(`Successfully Login ${data.email}`, {
+        theme: 'colored',
+      });
+      reset();
+    }
   };
 
   // Redirect
@@ -73,7 +75,7 @@ const Login = () => {
   }
 
   if (user?.user || gUser?.user) {
-    // console.log(user?.user);
+    console.log(user);
     // console.log(gUser?.user);
     // toast.success(`Email sent successfully at ${watch('email')}`, {
     //     theme: 'colored',
