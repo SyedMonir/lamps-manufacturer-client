@@ -25,7 +25,7 @@ const Reviews = () => {
     });
   }, []);
 
-  console.log(reviews);
+  // console.log(reviews);
 
   return (
     <div className="my-12 pt-8 mx-10 border-t">

@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { fetcher } from '../../api';
 import Spinner from '../../Component/Spinner';
@@ -10,6 +10,7 @@ import auth from '../../firebase.init';
 
 const PartPurchase = () => {
   const { partID } = useParams();
+  const navigate = useNavigate();
   const [fetching, setFetching] = React.useState(false);
 
   const [user, loading, authError] = useAuthState(auth);
@@ -92,9 +93,10 @@ const PartPurchase = () => {
       // const updatedQuantity =
       //   parseInt(part?.data.quantity) - parseInt(data.quantity);
       // await fetcher.put(`/parts/${partID}`, { updatedQuantity });
-      toast.success('Purchase successful! Go to Dashboard to pay!', {
+      toast.success('Purchase successful! You need to pay in My Order Page!', {
         theme: 'colored',
       });
+      navigate('/dashboard/my_orders');
     }
     reset();
   };
