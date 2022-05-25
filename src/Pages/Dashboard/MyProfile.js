@@ -40,6 +40,7 @@ const MyProfile = () => {
   // Handle Submit
   const onSubmit = async (data) => {
     const updateData = {
+      userName: user.displayName,
       education: data?.education || profile?.data?.user.education,
       linkedin: data?.linkedin || profile?.data?.user.linkedin,
       location: data?.location || profile?.data?.user.location,
@@ -62,7 +63,7 @@ const MyProfile = () => {
       <section className="mt-2">
         <div className="text-center">
           <img
-            className="rounded-full w-32 h-32 block mx-auto"
+            className="rounded-full w-32 h-32 border block mx-auto"
             src={user?.photoURL}
             alt={user?.displayName}
           />
@@ -164,6 +165,7 @@ const MyProfile = () => {
                     </label>
                     <input
                       type="text"
+                      required
                       placeholder="Your Linkedin Link"
                       className="input input-bordered"
                       {...register('linkedin')}

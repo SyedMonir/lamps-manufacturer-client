@@ -4,6 +4,7 @@ import './Dashboard.css';
 import { BiPurchaseTagAlt } from 'react-icons/bi';
 import { MdReviews } from 'react-icons/md';
 import { FaUserCircle } from 'react-icons/fa';
+import { RiAdminFill } from 'react-icons/ri';
 
 const Dashboard = () => {
   return (
@@ -32,6 +33,11 @@ const Dashboard = () => {
             <li>
               <NavLink to={'addReview'}>
                 <MdReviews /> Add Review
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={'makeAdmin'}>
+                <RiAdminFill /> Make Admin
               </NavLink>
             </li>
           </ul>

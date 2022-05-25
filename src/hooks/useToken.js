@@ -7,8 +7,8 @@ const useToken = (user) => {
     const email = user?.user?.email;
     const userData = {
       email: user?.user?.email,
-      userName: user?.user.displayName,
-      avatar: user?.user.photoURL,
+      userName: user?.user?.displayName,
+      avatar: user?.user?.photoURL,
       role: 'user',
     };
     if (email) {
