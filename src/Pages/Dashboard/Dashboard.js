@@ -5,6 +5,8 @@ import { BiPurchaseTagAlt } from 'react-icons/bi';
 import { MdReviews } from 'react-icons/md';
 import { FaUserCircle } from 'react-icons/fa';
 import { RiAdminFill } from 'react-icons/ri';
+import { RiFileAddFill } from 'react-icons/ri';
+import { BsInboxesFill } from 'react-icons/bs';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Spinner from '../../Component/Spinner';
@@ -62,6 +64,16 @@ const Dashboard = () => {
                 <li>
                   <NavLink to={'makeAdmin'}>
                     <RiAdminFill /> Make Admin
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={'addPart'}>
+                    <RiFileAddFill /> Add Part
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={'manageParts'}>
+                    <BsInboxesFill /> Manage Parts
                   </NavLink>
                 </li>
                 <li>

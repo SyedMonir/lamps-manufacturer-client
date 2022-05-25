@@ -16,6 +16,9 @@ import Payment from './Pages/Dashboard/Payment';
 import MakeAdmin from './Pages/Dashboard/MakeAdmin';
 import RequireAdmin from './Component/RequireAdmin';
 import RequireUser from './Component/RequireUser';
+import ManageOrders from './Pages/Dashboard/ManageOrders';
+import AddPart from './Pages/Dashboard/AddPart';
+import ManageParts from './Pages/Dashboard/ManageParts';
 
 function App() {
   return (
@@ -79,10 +82,26 @@ function App() {
               }
             />
             <Route
+              path="addPart"
+              element={
+                <RequireAdmin>
+                  <AddPart />
+                </RequireAdmin>
+              }
+            />
+            <Route
+              path="manageParts"
+              element={
+                <RequireAdmin>
+                  <ManageParts />
+                </RequireAdmin>
+              }
+            />
+            <Route
               path="manageOrders"
               element={
                 <RequireAdmin>
-                  <MakeAdmin />
+                  <ManageOrders />
                 </RequireAdmin>
               }
             />
