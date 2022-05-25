@@ -91,7 +91,11 @@ const MyProfile = () => {
                 <tbody>
                   <tr>
                     <th>Role</th>
-                    <td className="capitalize">{profile?.data?.user.role}</td>
+                    <td className="capitalize">
+                      {profile?.data?.user.role
+                        ? profile?.data?.user.role
+                        : 'User'}
+                    </td>
                   </tr>
                   <tr>
                     <th>Education</th>

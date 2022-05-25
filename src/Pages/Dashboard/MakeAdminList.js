@@ -42,8 +42,10 @@ const MakeAdminList = ({ user, index, refetch }) => {
       <td className="capitalize font-bold">
         {role === 'admin' ? (
           <span className="text-primary uppercase">{role}</span>
-        ) : (
+        ) : role ? (
           role
+        ) : (
+          'user'
         )}
       </td>
       <td>

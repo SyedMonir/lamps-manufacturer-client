@@ -189,8 +189,13 @@ const Login = () => {
                   </button>
                 </div>
               </form>
+              <div className="text-center">
+                <small>Admin: monir@admin.com</small>
+                <br />
+                <small>Pass: 123456</small>
+              </div>
               {/* Navigate To Login */}
-              <div className="mt-8 mb-4 text-sm font-display font-semibold text-gray-700 text-center">
+              <div className="mt-4 mb-4 text-sm font-display font-semibold text-gray-700 text-center">
                 Don't have an account ?{' '}
                 <Link
                   to={'/signup'}

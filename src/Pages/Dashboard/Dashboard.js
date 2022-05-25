@@ -5,8 +5,26 @@ import { BiPurchaseTagAlt } from 'react-icons/bi';
 import { MdReviews } from 'react-icons/md';
 import { FaUserCircle } from 'react-icons/fa';
 import { RiAdminFill } from 'react-icons/ri';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import Spinner from '../../Component/Spinner';
+import useAdmin from '../../hooks/useAdmin';
 
 const Dashboard = () => {
+  const [user, loading, error] = useAuthState(auth);
+  const [admin, adminLoading] = useAdmin(user);
+
+  if (loading || adminLoading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    console.log(error);
+  }
+
+  if (user) {
+    // console.log(user);
+  }
   return (
     <section>
       <div className="drawer drawer-mobile" style={{ height: '100%' }}>
@@ -25,21 +43,27 @@ const Dashboard = () => {
                 Profile
               </NavLink>
             </li>
-            <li>
-              <NavLink to={'my_orders'}>
-                <BiPurchaseTagAlt /> My Orders
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={'addReview'}>
-                <MdReviews /> Add Review
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={'makeAdmin'}>
-                <RiAdminFill /> Make Admin
-              </NavLink>
-            </li>
+            {!admin && (
+              <>
+                <li>
+                  <NavLink to={'my_orders'}>
+                    <BiPurchaseTagAlt /> My Orders
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={'addReview'}>
+                    <MdReviews /> Add Review
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {admin && (
+              <li>
+                <NavLink to={'makeAdmin'}>
+                  <RiAdminFill /> Make Admin
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </div>

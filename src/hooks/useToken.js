@@ -9,7 +9,6 @@ const useToken = (user) => {
       email: user?.user?.email,
       userName: user?.user?.displayName,
       avatar: user?.user?.photoURL,
-      role: 'user',
     };
     if (email) {
       fetcher.put(`/user/${email}`, userData).then((res) => {
