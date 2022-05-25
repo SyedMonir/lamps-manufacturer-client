@@ -5,6 +5,6 @@ export const fetcher = axios.create({
   baseURL: 'http://localhost:5000/',
   headers: {
     'Content-type': 'application/json',
-    authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    // authorization: `Bearer ${localStorage.getItem('accessToken')}`,
   },
 });

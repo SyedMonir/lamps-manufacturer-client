@@ -18,7 +18,11 @@ const MyOrderList = ({ order, index, refetch }) => {
       confirmButtonText: 'Yes, cancel it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetcher.delete(`/purchase/${_id}`);
+        fetcher.delete(`/purchase/${_id}`, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        });
 
         refetch();
         // Notify the user that the order is being cancelled

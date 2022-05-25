@@ -15,7 +15,11 @@ const MyOrders = () => {
     data: myOrder,
     refetch,
   } = useQuery(['purchase', user?.email], async () => {
-    return await fetcher.get(`/purchase/${user?.email}`);
+    return await fetcher.get(`/purchase/${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    });
   });
 
   //   console.log(myOrder);

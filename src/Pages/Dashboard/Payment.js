@@ -15,7 +15,11 @@ const Payment = () => {
     error,
     data: myIndividualOrder,
   } = useQuery(['purchase', id], async () => {
-    return await fetcher.get(`/purchase/${user?.email}/${id}`);
+    return await fetcher.get(`/purchase/${user?.email}/${id}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    });
   });
 
   console.log(myIndividualOrder?.data);

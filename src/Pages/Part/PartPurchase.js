@@ -20,7 +20,11 @@ const PartPurchase = () => {
     error,
     data: part,
   } = useQuery(['part', partID], async () => {
-    return await fetcher.get(`parts/${partID}`);
+    return await fetcher.get(`parts/${partID}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    });
   });
 
   // console.log(part);
@@ -75,7 +79,11 @@ const PartPurchase = () => {
     };
     // console.log(purchase);
 
-    const result = await fetcher.post('/purchase', purchase);
+    const result = await fetcher.post('/purchase', purchase, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    });
 
     setFetching(false);
     if (result?.status === 200) {
