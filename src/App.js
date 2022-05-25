@@ -15,6 +15,7 @@ import MyProfile from './Pages/Dashboard/MyProfile';
 import Payment from './Pages/Dashboard/Payment';
 import MakeAdmin from './Pages/Dashboard/MakeAdmin';
 import RequireAdmin from './Component/RequireAdmin';
+import RequireUser from './Component/RequireUser';
 
 function App() {
   return (
@@ -42,9 +43,30 @@ function App() {
           >
             {/* <Route index element={< />} /> */}
             {/* User */}
-            <Route path="my_orders" element={<MyOrders />} />
-            <Route path="my_orders/payment/:id" element={<Payment />} />
-            <Route path="addReview" element={<AddReview />} />
+            <Route
+              path="my_orders"
+              element={
+                <RequireUser>
+                  <MyOrders />
+                </RequireUser>
+              }
+            />
+            <Route
+              path="my_orders/payment/:id"
+              element={
+                <RequireUser>
+                  <Payment />
+                </RequireUser>
+              }
+            />
+            <Route
+              path="addReview"
+              element={
+                <RequireUser>
+                  <AddReview />
+                </RequireUser>
+              }
+            />
             {/* User and Admin */}
             <Route path="myProfile" element={<MyProfile />} />
             {/* Admin */}
