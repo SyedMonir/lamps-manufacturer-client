@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaQuoteLeft } from 'react-icons/fa';
+// import { FaQuoteLeft } from 'react-icons/fa';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -64,9 +64,7 @@ const Reviews = () => {
         <SwiperSlide>
           <article className="review p-4">
             <div className="review-content bg-black">
-              <div className="review-icon">
-                <FaQuoteLeft className="text-white text-center mx-auto mt-3" />
-              </div>
+              <div className="review-icon">4*</div>
               <p className="description italic text-base">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Praesent bibendum dolor sit amet eros imperdiet, sit amet
@@ -76,7 +74,6 @@ const Reviews = () => {
             <h3 className=" capitalize tracking-wide font-semibold text-primary">
               John
             </h3>
-            <span className="text-base ">Web Developer</span>
           </article>
         </SwiperSlide>
       </Swiper>
