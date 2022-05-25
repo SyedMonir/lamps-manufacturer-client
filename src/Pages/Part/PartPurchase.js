@@ -22,6 +22,7 @@ const PartPurchase = () => {
   } = useQuery(['part', partID], async () => {
     return await fetcher.get(`parts/${partID}`, {
       headers: {
+        'Content-type': 'application/json',
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
     });
@@ -81,6 +82,7 @@ const PartPurchase = () => {
 
     const result = await fetcher.post('/purchase', purchase, {
       headers: {
+        'Content-type': 'application/json',
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
     });

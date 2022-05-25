@@ -17,6 +17,7 @@ const MyOrders = () => {
   } = useQuery(['purchase', user?.email], async () => {
     return await fetcher.get(`/purchase/${user?.email}`, {
       headers: {
+        'Content-type': 'application/json',
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
     });

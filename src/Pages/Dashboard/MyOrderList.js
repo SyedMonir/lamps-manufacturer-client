@@ -20,6 +20,7 @@ const MyOrderList = ({ order, index, refetch }) => {
       if (result.isConfirmed) {
         fetcher.delete(`/purchase/${_id}`, {
           headers: {
+            'Content-type': 'application/json',
             authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
         });
