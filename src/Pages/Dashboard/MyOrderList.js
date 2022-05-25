@@ -4,7 +4,9 @@ import Swal from 'sweetalert2';
 import { fetcher } from '../../api';
 
 const MyOrderList = ({ order, index, refetch }) => {
-  const { _id, address, partName, phone, quantity, paid } = order;
+  const { _id, address, partName, phone, quantity, paid, transactionId } =
+    order;
+  // console.log(order);
   const navigate = useNavigate();
 
   const handleDelete = () => {
@@ -40,7 +42,13 @@ const MyOrderList = ({ order, index, refetch }) => {
       <td>{quantity}</td>
       <td>
         {paid ? (
-          <span className="text-success uppercase font-semibold">Paid</span>
+          <span>
+            <span className="text-success uppercase font-semibold">Paid</span>
+            <br />
+            <small className="text-primary">
+              Transaction Id: {transactionId}
+            </small>
+          </span>
         ) : (
           <button
             onClick={() => navigate(`payment/${_id}`)}

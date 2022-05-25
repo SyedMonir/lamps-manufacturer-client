@@ -163,6 +163,9 @@ const CheckoutForm = ({ myIndividualOrder, totalPrice: price }) => {
           </button>
         </div>
       </form>
+      <div className="flex justify-center text-slate-500 pt-4">
+        <small>Card Number For Check : 5555 5555 5555 4444</small>
+      </div>
     </div>
   );
 };

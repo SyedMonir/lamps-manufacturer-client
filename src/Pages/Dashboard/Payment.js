@@ -44,12 +44,10 @@ const Payment = () => {
   const calculatePrice = () => {
     const price = parseInt(myIndividualOrder?.data?.price) || 30;
     const totalUnit = parseInt(myIndividualOrder?.data?.quantity) * price;
-
-    // const tax = totalUnit * 0.1;
-    // const shipping = totalUnit * 0.05;
-    // const total = totalUnit + tax + shipping;
-
-    return totalUnit;
+    const tax = totalUnit * 0.1;
+    const shipping = totalUnit * 0.05;
+    const total = totalUnit + tax + shipping;
+    return parseInt(total);
   };
 
   const totalPrice = calculatePrice();
@@ -106,7 +104,7 @@ const Payment = () => {
             <div className="flex items-end justify-between">
               <span className="font-semibold">You need to pay</span>
               <span className="font-semibold">
-                $ <span className="text-primary text-xl">{}</span>
+                $ <span className="text-primary text-xl">{totalPrice}</span>
               </span>
             </div>
             <span className="text-xs text-gray-500 mt-2">
