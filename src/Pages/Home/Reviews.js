@@ -1,5 +1,5 @@
-import React from 'react';
-// import { FaQuoteLeft } from 'react-icons/fa';
+import React, { useEffect } from 'react';
+import { AiFillStar } from 'react-icons/ai';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -14,8 +14,19 @@ import './Home.css';
 
 // import required modules
 import { Autoplay, FreeMode, Pagination, Navigation } from 'swiper';
+import { fetcher } from '../../api';
 
 const Reviews = () => {
+  const [reviews, setReviews] = React.useState([]);
+  useEffect(() => {
+    fetcher.get('/review').then((res) => {
+      // console.log(res.data);
+      setReviews(res.data);
+    });
+  }, []);
+
+  console.log(reviews);
+
   return (
     <div className="my-12 pt-8 mx-10 border-t">
       <h1 className="uppercase text-center text-3xl font-bold">
@@ -61,21 +72,30 @@ const Reviews = () => {
         className="mySwiper"
       >
         {/* 1 */}
-        <SwiperSlide>
-          <article className="review p-4">
-            <div className="review-content bg-black">
-              <div className="review-icon">4*</div>
-              <p className="description italic text-base">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Praesent bibendum dolor sit amet eros imperdiet, sit amet
-                hendrerit nisi vehicula.
-              </p>
-            </div>
-            <h3 className=" capitalize tracking-wide font-semibold text-primary">
-              John
-            </h3>
-          </article>
-        </SwiperSlide>
+        {reviews.map((review) => (
+          <SwiperSlide key={review._id}>
+            <article className="review p-4">
+              <div className="review-content bg-black">
+                <div className="review-icon">
+                  <span className="flex justify-center items-center">
+                    {review.star ? review.star : 5}
+                    {'  '}
+                    <AiFillStar className="text-yellow-400 ml-1" />
+                  </span>
+                </div>
+                <p className="description italic text-base text-justify">
+                  {review.description
+                    ? review.description.slice(0, 200) + '...'
+                    : 'No description'}
+                </p>
+              </div>
+              <h3 className=" capitalize tracking-wide font-semibold text-primary">
+                {review.name ? review.name : 'Anonymous'}
+              </h3>
+              <p className="text-base">{review.email}</p>
+            </article>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
