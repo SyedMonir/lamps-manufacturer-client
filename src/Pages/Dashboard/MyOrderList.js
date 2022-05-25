@@ -45,9 +45,9 @@ const MyOrderList = ({ order, index, refetch }) => {
           <span>
             <span className="text-success uppercase font-semibold">Paid</span>
             <br />
-            <small className="text-primary">
+            <span class="badge badge-ghost badge-sm p-3">
               Transaction Id: {transactionId}
-            </small>
+            </span>
           </span>
         ) : (
           <button
