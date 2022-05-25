@@ -15,15 +15,15 @@ const MyOrderList = ({ order, index, refetch }) => {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: 'Yes, cancel it!',
     }).then((result) => {
       if (result.isConfirmed) {
         fetcher.delete(`/purchase/${_id}`);
 
-        // Notify the user that the order is being deleted
-        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+        refetch();
+        // Notify the user that the order is being cancelled
+        Swal.fire('Cancelled!', 'Your order has been cancelled.', 'success');
       }
-      refetch();
     });
   };
   return (
@@ -46,12 +46,16 @@ const MyOrderList = ({ order, index, refetch }) => {
         )}
       </td>
       <td>
-        <button
-          onClick={handleDelete}
-          className="btn btn-error text-white btn-xs"
-        >
-          Cancel
-        </button>
+        {paid ? (
+          <span className="text-success uppercase font-semibold">-</span>
+        ) : (
+          <button
+            onClick={handleDelete}
+            className="btn btn-error text-white btn-xs"
+          >
+            Cancel
+          </button>
+        )}
       </td>
     </tr>
   );

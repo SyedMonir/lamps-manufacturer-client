@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import signup from '../assets/image/signup.jpg';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
@@ -12,9 +12,10 @@ import {
 } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
 import Spinner from './Spinner';
-import { fetcher } from '../api';
+import useToken from '../hooks/useToken';
 
 const Signup = () => {
+  const navigate = useNavigate();
   // Show Password
   const [eye, setEye] = useState(false);
 
@@ -49,17 +50,16 @@ const Signup = () => {
     reset();
   };
 
-  // Updating to db
-  useEffect(() => {
-    const userData = {
-      email: user?.user?.email || gUser?.user?.email,
-      userName: user?.user.displayName || gUser?.user.displayName,
-      avatar: user?.user.photoURL || gUser?.user.photoURL,
-      role: 'user',
-    };
+  const [token] = useToken(user || gUser);
 
-    fetcher.put(`user/${user?.user?.email}`, userData);
-  }, []);
+  // Redirect
+  useEffect(() => {
+    if (token) {
+      if (token) {
+        navigate('/');
+      }
+    }
+  }, [token, navigate]);
 
   if (loading || gLoading || updating || sending) {
     return <Spinner />;

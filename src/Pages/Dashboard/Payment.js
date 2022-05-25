@@ -18,7 +18,7 @@ const Payment = () => {
     return await fetcher.get(`/purchase/${user?.email}/${id}`);
   });
 
-  console.log(myIndividualOrder);
+  console.log(myIndividualOrder?.data);
 
   if (isLoading || loading) {
     return <Spinner />;
@@ -45,14 +45,17 @@ const Payment = () => {
     <section>
       <div className="flex flex-col p-4">
         <h2 className="text-lg font-medium">Purchase Summary:</h2>
-        <div className="bg-white rounded mt-4 shadow-lg py-6 px-8 lg:w-1/2">
+        <div className="bg-white rounded mt-4 shadow-lg py-6 px-8 lg:w-1/2 border">
           <p>Order Id: {myIndividualOrder?.data.partID}</p>
           <div className="flex items-end">
             <p className="text-base font-semibold focus:outline-none ">
               {myIndividualOrder?.data.partName}
             </p>
             <span className="text-xl ml-auto font-bold">
-              ${myIndividualOrder?.data.price}
+              ${' '}
+              <span className="text-primary">
+                {myIndividualOrder?.data.price}
+              </span>
             </span>
             <span className="text-sm text-gray-500 mb-px">/unit</span>
           </div>

@@ -73,7 +73,7 @@ const PartPurchase = () => {
       price: part?.data.price,
       paid: false,
     };
-    console.log(purchase);
+    // console.log(purchase);
 
     const result = await fetcher.post('/purchase', purchase);
 
@@ -82,7 +82,7 @@ const PartPurchase = () => {
       // const updatedQuantity =
       //   parseInt(part?.data.quantity) - parseInt(data.quantity);
       // await fetcher.put(`/parts/${partID}`, { updatedQuantity });
-      toast.success('Purchase successful!', {
+      toast.success('Purchase successful! Go to Dashboard to pay!', {
         theme: 'colored',
       });
     }
@@ -123,12 +123,12 @@ const PartPurchase = () => {
                   </p>
                 </div>
                 <div className="flex ml-6 items-center">
-                  <span className="title-font font-medium text-xl text-gray-900">
-                    ${' '}
+                  <span className="title-font font-medium text-sm text-gray-900">
+                    ${'  '}
                     <span className="text-primary text-3xl font-bold">
                       {part?.data.price}
-                    </span>{' '}
-                    / Per-Unit
+                    </span>
+                    /Unit
                   </span>
                 </div>
               </div>

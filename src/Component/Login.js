@@ -12,6 +12,7 @@ import Spinner from './Spinner';
 import { FcGoogle } from 'react-icons/fc';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import { toast } from 'react-toastify';
+import useToken from '../hooks/useToken';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -52,13 +53,14 @@ const Login = () => {
     }
   };
 
-  // Redirect
+  const [token] = useToken(user || gUser);
 
+  // Redirect
   useEffect(() => {
-    if (user?.user || gUser?.user) {
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [from, user, gUser, navigate]);
+  }, [from, token, navigate]);
 
   const resetPassword = async () => {
     if (watch('email')) {
