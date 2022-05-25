@@ -35,7 +35,7 @@ const Dashboard = () => {
         </div>
         <div className="drawer-side border-r ">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 overflow-y-auto w-44 bg-base-100 text-base-content">
+          <ul className="menu p-2 overflow-y-auto w-44 bg-base-100 text-base-content">
             {/* <!-- Sidebar content here --> */}
             <li>
               <NavLink to={'myProfile'}>
@@ -58,11 +58,18 @@ const Dashboard = () => {
               </>
             )}
             {admin && (
-              <li>
-                <NavLink to={'makeAdmin'}>
-                  <RiAdminFill /> Make Admin
-                </NavLink>
-              </li>
+              <>
+                <li>
+                  <NavLink to={'makeAdmin'}>
+                    <RiAdminFill /> Make Admin
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={'manageOrders'}>
+                    <BiPurchaseTagAlt /> Manage Orders
+                  </NavLink>
+                </li>
+              </>
             )}
           </ul>
         </div>

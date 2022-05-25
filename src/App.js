@@ -14,6 +14,7 @@ import AddReview from './Pages/Dashboard/AddReview';
 import MyProfile from './Pages/Dashboard/MyProfile';
 import Payment from './Pages/Dashboard/Payment';
 import MakeAdmin from './Pages/Dashboard/MakeAdmin';
+import RequireAdmin from './Component/RequireAdmin';
 
 function App() {
   return (
@@ -40,12 +41,29 @@ function App() {
             }
           >
             {/* <Route index element={< />} /> */}
+            {/* User */}
             <Route path="my_orders" element={<MyOrders />} />
             <Route path="my_orders/payment/:id" element={<Payment />} />
             <Route path="addReview" element={<AddReview />} />
+            {/* User and Admin */}
             <Route path="myProfile" element={<MyProfile />} />
             {/* Admin */}
-            <Route path="makeAdmin" element={<MakeAdmin />} />
+            <Route
+              path="makeAdmin"
+              element={
+                <RequireAdmin>
+                  <MakeAdmin />
+                </RequireAdmin>
+              }
+            />
+            <Route
+              path="manageOrders"
+              element={
+                <RequireAdmin>
+                  <MakeAdmin />
+                </RequireAdmin>
+              }
+            />
           </Route>
           <Route path="*" element={<Home />} />
         </Routes>
