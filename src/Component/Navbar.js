@@ -77,7 +77,7 @@ const Navbar = ({ children }) => {
               onClick={() => navigate(`dashboard/myProfile`)}
               className="avatar"
             >
-              <div className="w-12 h-12 rounded-full">
+              <div className="w-12 h-12 rounded-full cursor-pointer">
                 <img src={user?.photoURL} alt={user?.displayName} />
               </div>
             </div>
