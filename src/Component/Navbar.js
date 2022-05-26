@@ -40,14 +40,6 @@ const Navbar = ({ children }) => {
       </li>
       <li>
         <NavLink
-          to="/dashboard"
-          className={({ isActive }) => (isActive ? 'active-link' : 'link')}
-        >
-          Dashboard
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
           to="/blogs"
           className={({ isActive }) => (isActive ? 'active-link' : 'link')}
         >
@@ -60,6 +52,14 @@ const Navbar = ({ children }) => {
           className={({ isActive }) => (isActive ? 'active-link' : 'link')}
         >
           Portfolio
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/dashboard"
+          className={({ isActive }) => (isActive ? 'active-link' : 'link')}
+        >
+          Dashboard
         </NavLink>
       </li>
       {auth?.currentUser ? (
