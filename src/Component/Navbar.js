@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineMenuUnfold } from 'react-icons/ai';
 import { MdDashboard } from 'react-icons/md';
+import { FaUserAlt } from 'react-icons/fa';
 import './style.css';
 import Spinner from './Spinner';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -10,6 +11,7 @@ import { signOut } from 'firebase/auth';
 
 const Navbar = ({ children }) => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [user, loading, error] = useAuthState(auth);
 
   if (loading) {
@@ -21,7 +23,7 @@ const Navbar = ({ children }) => {
   }
 
   if (user) {
-    // console.log(user?.user);
+    // console.log(user);
   }
 
   const handleSignOut = () => {
@@ -63,9 +65,31 @@ const Navbar = ({ children }) => {
         </NavLink>
       </li>
       {auth?.currentUser ? (
-        <span onClick={handleSignOut} className="link">
-          Sign out
-        </span>
+        <>
+          <button
+            onClick={handleSignOut}
+            className="btn bg-primary text-white hover:bg-slate-700"
+          >
+            Sign out
+          </button>
+          {user?.photoURL ? (
+            <div
+              onClick={() => navigate(`dashboard/myProfile`)}
+              className="avatar"
+            >
+              <div className="w-12 h-12 rounded-full">
+                <img src={user?.photoURL} alt={user?.displayName} />
+              </div>
+            </div>
+          ) : (
+            <span
+              onClick={() => navigate(`dashboard/myProfile`)}
+              className="bg-primary rounded-3xl p-3 cursor-pointer"
+            >
+              <FaUserAlt size={25} />
+            </span>
+          )}
+        </>
       ) : (
         <>
           <li>
@@ -116,7 +140,9 @@ const Navbar = ({ children }) => {
             </div>
 
             <div className="flex-none hidden lg:block">
-              <ul className="menu menu-horizontal gap-x-2">{menuItems}</ul>
+              <ul className="menu menu-horizontal gap-x-2 items-center">
+                {menuItems}
+              </ul>
             </div>
           </div>
           {children}

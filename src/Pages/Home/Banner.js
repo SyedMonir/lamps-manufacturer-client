@@ -22,7 +22,9 @@ const Banner = () => {
               We manufacture and sell the best quality lamps parts in the world.
               We are the best in the world.
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            <span className=" bg-primary py-4 px-12 rounded text-white">
+              Explore The Website
+            </span>
           </div>
         </div>
       </div>

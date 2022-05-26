@@ -22,6 +22,7 @@ import ManageParts from './Pages/Dashboard/ManageParts';
 import Blogs from './Pages/Blogs/Blogs';
 import MyPortfolio from './Pages/Portfolio/MyPortfolio';
 import NoRoute from './Component/NoRoute';
+import DashboardData from './Pages/Dashboard/DashboardData';
 
 function App() {
   return (
@@ -49,7 +50,7 @@ function App() {
               </RequireAuth>
             }
           >
-            {/* <Route index element={< />} /> */}
+            <Route index element={<DashboardData />} />
             {/* User */}
             <Route
               path="my_orders"

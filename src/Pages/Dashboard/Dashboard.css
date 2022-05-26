@@ -1,13 +1,10 @@
-/* .active-link {
-    transition: color ease-in-out 300ms;
-    color: #bc9f4c;
-    padding: 1rem;
-    margin-bottom: .15rem;
-    border-bottom: 2px solid #bc9f4c;
+.activeDashboard {
+    background-color: #bc9f4c;
+    color: white;
 }
 
-.link {
-    text-decoration: none;
-    padding: 1rem;
-    border-bottom: 2px solid transparent;
-} */
+.dashboard {
+    background-color: #bc9e4c56;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}

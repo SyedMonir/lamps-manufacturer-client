@@ -37,10 +37,15 @@ const Dashboard = () => {
         </div>
         <div className="drawer-side border-r ">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-2 overflow-y-auto w-44 bg-base-100 text-base-content">
+          <ul className="menu p-2 h-[85vh] overflow-y-auto w-44 bg-base-100 text-base-content">
             {/* <!-- Sidebar content here --> */}
             <li>
-              <NavLink to={'myProfile'}>
+              <NavLink
+                to={'myProfile'}
+                className={({ isActive }) =>
+                  isActive ? 'activeDashboard' : 'dashboard'
+                }
+              >
                 <FaUserCircle />
                 Profile
               </NavLink>
@@ -48,12 +53,22 @@ const Dashboard = () => {
             {!admin && (
               <>
                 <li>
-                  <NavLink to={'my_orders'}>
+                  <NavLink
+                    to={'my_orders'}
+                    className={({ isActive }) =>
+                      isActive ? 'activeDashboard' : 'dashboard'
+                    }
+                  >
                     <BiPurchaseTagAlt /> My Orders
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={'addReview'}>
+                  <NavLink
+                    to={'addReview'}
+                    className={({ isActive }) =>
+                      isActive ? 'activeDashboard' : 'dashboard'
+                    }
+                  >
                     <MdReviews /> Add Review
                   </NavLink>
                 </li>
@@ -62,22 +77,42 @@ const Dashboard = () => {
             {admin && (
               <>
                 <li>
-                  <NavLink to={'makeAdmin'}>
+                  <NavLink
+                    to={'makeAdmin'}
+                    className={({ isActive }) =>
+                      isActive ? 'activeDashboard' : 'dashboard'
+                    }
+                  >
                     <RiAdminFill /> Make Admin
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={'addPart'}>
+                  <NavLink
+                    to={'addPart'}
+                    className={({ isActive }) =>
+                      isActive ? 'activeDashboard' : 'dashboard'
+                    }
+                  >
                     <RiFileAddFill /> Add Part
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={'manageParts'}>
+                  <NavLink
+                    to={'manageParts'}
+                    className={({ isActive }) =>
+                      isActive ? 'activeDashboard' : 'dashboard'
+                    }
+                  >
                     <BsInboxesFill /> Manage Parts
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={'manageOrders'}>
+                  <NavLink
+                    to={'manageOrders'}
+                    className={({ isActive }) =>
+                      isActive ? 'activeDashboard' : 'dashboard'
+                    }
+                  >
                     <BiPurchaseTagAlt /> Manage Orders
                   </NavLink>
                 </li>
