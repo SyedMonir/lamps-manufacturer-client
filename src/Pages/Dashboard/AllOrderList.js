@@ -3,7 +3,38 @@ import Swal from 'sweetalert2';
 import { fetcher } from '../../api';
 
 const AllOrderList = ({ orders, index, refetch }) => {
-  const { _id, address, email, name, paid, partName } = orders;
+  const { _id, address, email, name, paid, partName, isShipped } = orders;
+
+  const handleShipped = async () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to update the shipping status?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, shipped it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/purchase/shipped/${email}/${_id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-type': 'application/json',
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data?.modifiedCount) {
+              refetch();
+              // Notify the user that the order is being shipped
+              Swal.fire('Shipped!', 'This order has been shipped.', 'success');
+            }
+          });
+      }
+    });
+  };
 
   const handleDelete = () => {
     Swal.fire({
@@ -39,9 +70,18 @@ const AllOrderList = ({ orders, index, refetch }) => {
       <td>{partName}</td>
       <td>
         {paid ? (
-          <button className="btn btn-xs bg-success text-white uppercase font-semibold hover:bg-white hover:text-slate-700">
-            Pending{' '}
-          </button>
+          <span>
+            {!isShipped ? (
+              <button
+                onClick={handleShipped}
+                className="btn btn-xs bg-success text-white uppercase font-semibold hover:bg-white hover:text-slate-700"
+              >
+                Pending
+              </button>
+            ) : (
+              <span className="text-success">Shipped</span>
+            )}
+          </span>
         ) : (
           <span className="text-yellow-500 uppercase">Unpaid</span>
         )}
