@@ -60,7 +60,7 @@ const AddReview = () => {
       },
     });
 
-    if (response.status) {
+    if (response.status === 200) {
       toast.success('Review submitted successfully!', {
         theme: 'colored',
       });
