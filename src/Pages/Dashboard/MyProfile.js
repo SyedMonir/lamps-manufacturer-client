@@ -77,20 +77,20 @@ const MyProfile = () => {
           </h3>
 
           <section className="flex flex-col lg:flex-row justify-center items-start">
-            <div className="overflow-x-auto w-full lg:w-1/2 mx-auto p-8">
+            <div className="overflow-x-auto w-full lg:w-1/2 mx-auto lg:p-8 p-0">
               <h3 className="text-center mb-12 text-xl font-medium tracking-wide">
                 Your Profile Here !
               </h3>
               <table className="table table-zebra w-full mx-auto">
                 <thead>
                   <tr>
-                    <th>Title</th>
+                    <td>Title</td>
                     <th>Details</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th>Role</th>
+                    <td>Role</td>
                     <td className="capitalize">
                       {profile?.data?.user.role
                         ? profile?.data?.user.role
@@ -98,20 +98,20 @@ const MyProfile = () => {
                     </td>
                   </tr>
                   <tr>
-                    <th>Education</th>
+                    <td>Education</td>
                     <td>{profile?.data?.user.education}</td>
                   </tr>
 
                   <tr>
-                    <th>Location</th>
+                    <td>Location</td>
                     <td>{profile?.data?.user.location}</td>
                   </tr>
                   <tr>
-                    <th>Phone</th>
+                    <td>Phone</td>
                     <td>{profile?.data?.user.phone}</td>
                   </tr>
                   <tr>
-                    <th>Linkedin</th>
+                    <td>Linkedin</td>
                     <td>{profile?.data?.user.linkedin}</td>
                   </tr>
                 </tbody>

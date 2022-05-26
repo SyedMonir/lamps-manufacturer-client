@@ -42,7 +42,7 @@ const AddPart = () => {
   };
 
   return (
-    <div className="lg:w-1/2 w-full mx-auto">
+    <div className="lg:w-1/2 w-full mx-auto p-4">
       <h2 className="mb-4 text-xl underline uppercase tracking-widest text-primary">
         Add Part:{' '}
       </h2>

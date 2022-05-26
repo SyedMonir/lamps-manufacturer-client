@@ -25,7 +25,7 @@ const Reviews = () => {
     });
   }, []);
 
-  // console.log(reviews);
+  const lastReviews = reviews.slice(-6);
 
   return (
     <div className="my-12 pt-8 mx-10 border-t">
@@ -71,8 +71,8 @@ const Reviews = () => {
         modules={[Autoplay, FreeMode, Pagination, Navigation]}
         className="mySwiper"
       >
-        {/* 1 */}
-        {reviews.map((review) => (
+        {/*  */}
+        {lastReviews?.map((review) => (
           <SwiperSlide key={review._id}>
             <article className="review p-4">
               <div className="review-content bg-black">

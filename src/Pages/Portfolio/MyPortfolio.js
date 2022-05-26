@@ -15,38 +15,38 @@ const MyPortfolio = () => {
             />
           </div>
           <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900 uppercase tracking-widest">
               Syed Monirul Alam
             </h1>
             <div className="mb-8 leading-relaxed text-left">
               <p>
                 Email:{' '}
-                <span className="text-primary font-semibold text-xl">
+                <span className="uppercase font-semibold text-xl">
                   syed.monirul.ctg@gmail.com
                 </span>{' '}
               </p>
               <p>
                 Education:{' '}
-                <span className="text-primary font-semibold text-base">
+                <span className="uppercase font-semibold text-base">
                   B.Sc. in Civil Technology from UCTC
                 </span>
               </p>
               <p>
                 Expertise:{' '}
-                <span className="text-primary font-semibold text-xl">
+                <span className="uppercase font-semibold text-xl">
                   React.js, JavaScript(JS6), Node.js, Express.js, Mongodb,
                   Tailwind, Bootstrap
                 </span>
               </p>
               <p>
                 Comfortable:{' '}
-                <span className="text-primary font-semibold text-xl">
+                <span className="uppercase font-semibold text-xl">
                   Material UI,
                 </span>
               </p>
               <p>
                 Familiar:{' '}
-                <span className="text-primary font-semibold text-xl">
+                <span className="uppercase font-semibold text-xl">
                   JQuery, Wordpress, Tools: Git, VS Code, Chrome dev tools,
                   Heroku, Netlify, Firebase, Figma
                 </span>
