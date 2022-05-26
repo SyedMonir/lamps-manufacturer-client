@@ -16,7 +16,7 @@ const CheckoutForm = ({ myIndividualOrder, totalPrice: price }) => {
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
 
-    fetch('http://localhost:5000/create-payment-intent', {
+    fetch('https://lamps-manufacturer.herokuapp.com/create-payment-intent', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ const CheckoutForm = ({ myIndividualOrder, totalPrice: price }) => {
       setCardError(error?.message || '');
       setSuccess('');
     } else {
-      // console.log('[PaymentMethod]', paymentMethod);
+      console.log('[PaymentMethod]', paymentMethod);
     }
 
     setSpinner(true);
@@ -96,7 +96,7 @@ const CheckoutForm = ({ myIndividualOrder, totalPrice: price }) => {
       booking: _id,
       transitionId: paymentIntent?.id,
     };
-    fetch(`http://localhost:5000/purchase/${email}/${_id}`, {
+    fetch(`https://lamps-manufacturer.herokuapp.com/purchase/${email}/${_id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

@@ -15,7 +15,7 @@ const MakeAdminList = ({ user, index, refetch }) => {
       confirmButtonText: 'Yes, do it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/user/admin/${email}`, {
+        fetch(`https://lamps-manufacturer.herokuapp.com/user/admin/${email}`, {
           method: 'PUT',
           headers: {
             'Content-type': 'application/json',
