@@ -54,6 +54,14 @@ const Navbar = ({ children }) => {
           Blogs
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/myPortfolio"
+          className={({ isActive }) => (isActive ? 'active-link' : 'link')}
+        >
+          Portfolio
+        </NavLink>
+      </li>
       {auth?.currentUser ? (
         <span onClick={handleSignOut} className="link">
           Sign out

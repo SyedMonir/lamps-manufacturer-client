@@ -20,6 +20,7 @@ import ManageOrders from './Pages/Dashboard/ManageOrders';
 import AddPart from './Pages/Dashboard/AddPart';
 import ManageParts from './Pages/Dashboard/ManageParts';
 import Blogs from './Pages/Blogs/Blogs';
+import MyPortfolio from './Pages/Portfolio/MyPortfolio';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/myPortfolio" element={<MyPortfolio />} />
           <Route
             path="/purchase/:partID"
             element={
