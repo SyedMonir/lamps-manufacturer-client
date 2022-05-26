@@ -21,6 +21,7 @@ import AddPart from './Pages/Dashboard/AddPart';
 import ManageParts from './Pages/Dashboard/ManageParts';
 import Blogs from './Pages/Blogs/Blogs';
 import MyPortfolio from './Pages/Portfolio/MyPortfolio';
+import NoRoute from './Component/NoRoute';
 
 function App() {
   return (
@@ -110,7 +111,7 @@ function App() {
               }
             />
           </Route>
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<NoRoute />} />
         </Routes>
         <Footer />
         <ToastContainer />
