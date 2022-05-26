@@ -16,16 +16,19 @@ const AllOrderList = ({ orders, index, refetch }) => {
       confirmButtonText: 'Yes, shipped it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/purchase/shipped/${email}/${_id}`, {
-          method: 'PATCH',
-          headers: {
-            'Content-type': 'application/json',
-            authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-        })
+        fetch(
+          `https://lamps-manufacturer.herokuapp.com/purchase/shipped/${email}/${_id}`,
+          {
+            method: 'PATCH',
+            headers: {
+              'Content-type': 'application/json',
+              authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (data?.modifiedCount) {
               refetch();
               // Notify the user that the order is being shipped

@@ -22,7 +22,7 @@ const AddPart = () => {
       quantity: parseInt(data.quantity),
       image: data.image,
     };
-    console.log(part);
+    // console.log(part);
 
     const response = await fetcher.post('/parts', part, {
       headers: {
@@ -31,7 +31,7 @@ const AddPart = () => {
       },
     });
 
-    console.log(response);
+    // console.log(response);
 
     if (response.status === 200) {
       toast.success('Added Part successfully!', {
