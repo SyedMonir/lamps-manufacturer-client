@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineMenuUnfold } from 'react-icons/ai';
 import { MdDashboard } from 'react-icons/md';
@@ -11,6 +11,21 @@ import { signOut } from 'firebase/auth';
 
 const Navbar = ({ children }) => {
   const { pathname } = useLocation();
+  const [show, setShow] = useState(false);
+
+  const transitionNavbar = () => {
+    if (window.screenY > 100) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', transitionNavbar);
+    return () => window.removeEventListener('scroll', transitionNavbar);
+    // useEffect need to clean that's why removing eventListener;
+  }, []);
+
   const navigate = useNavigate();
   const [user, loading, error] = useAuthState(auth);
 
@@ -117,7 +132,11 @@ const Navbar = ({ children }) => {
       <div className="drawer drawer-end">
         <input id="navbar-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
-          <div className="w-full navbar min-h-[3.5rem] bg-base-100 sticky top-0 z-50 py-0 lg:px-12 shadow ">
+          <div
+            className={`w-full navbar min-h-[3.5rem] sticky top-0 z-50 py-0 lg:px-12 shadow ${
+              show ? 'bg-black' : 'bg-base-100'
+            }`}
+          >
             {pathname.includes('dashboard') && (
               <label
                 tabIndex="0"

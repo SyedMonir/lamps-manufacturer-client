@@ -43,7 +43,6 @@ const Banner = () => {
             <span
               data-aos="zoom-in"
               data-aos-delay="1300"
-              class="btn btn-primary"
               className=" bg-primary py-4 px-12 rounded text-white"
             >
               Explore The Website
