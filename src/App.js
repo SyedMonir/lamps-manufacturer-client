@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Footer from './Component/Footer';
 import Login from './Component/Login';
 import Navbar from './Component/Navbar';
@@ -23,8 +25,12 @@ import Blogs from './Pages/Blogs/Blogs';
 import MyPortfolio from './Pages/Portfolio/MyPortfolio';
 import NoRoute from './Component/NoRoute';
 import DashboardData from './Pages/Dashboard/DashboardData';
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <>
       <Navbar>
