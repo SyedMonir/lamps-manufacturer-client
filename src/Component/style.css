@@ -1,3 +1,4 @@
+/* Navbar */
 .active-link {
     transition: color ease-in-out 300ms;
     color: #bc9f4c;
@@ -34,4 +35,16 @@
 
 .loader div:nth-child(4) {
     animation-delay: 0.9s;
+}
+
+/* Card Hover */
+.partCard {
+    transition: all ease-in-out 300ms;
+    transform: scale(1);
+}
+
+.partCard:hover {
+    box-shadow: 0 0 999px 999px rgba(255, 255, 255, 0.3);
+    z-index: 40;
+    transform: scale(1.01);
 }

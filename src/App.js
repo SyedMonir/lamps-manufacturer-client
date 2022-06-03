@@ -30,12 +30,14 @@ import { useEffect } from 'react';
 function App() {
   useEffect(() => {
     AOS.init();
+    AOS.refresh();
   }, []);
   return (
     <>
       <Navbar>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/blogs" element={<Blogs />} />

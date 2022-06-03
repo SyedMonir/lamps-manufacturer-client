@@ -7,10 +7,15 @@ const PartCard = ({ part }) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 mb-4">
-        <article className="overflow-hidden rounded-lg shadow-lg">
+      <div className="partCard my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 mb-4">
+        <article className="overflow-hidden rounded-lg shadow-lg hover:shadow-2xl">
           <figure>
-            <img alt={name} className="block h-80 w-full " src={image} />
+            <img
+              onClick={() => navigate(`/purchase/${_id}`)}
+              alt={name}
+              className="block h-80 w-full cursor-pointer"
+              src={image}
+            />
           </figure>
 
           <header className=" leading-tight p-4">
@@ -33,8 +38,8 @@ const PartCard = ({ part }) => {
             </div>
           </header>
 
-          <footer className="flex items-center justify-between leading-none p-4 md:p-4 px-4">
-            <p>{description.slice(0, 100)}..</p>
+          <footer className="flex items-center justify-between leading-none py-2  px-4">
+            <p>{description.slice(0, 90)}..</p>
           </footer>
 
           <button

@@ -15,15 +15,23 @@ import './Home.css';
 // import required modules
 import { Autoplay, FreeMode, Pagination, Navigation } from 'swiper';
 import { fetcher } from '../../api';
+import Spinner from '../../Component/Spinner';
 
 const Reviews = () => {
   const [reviews, setReviews] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
   useEffect(() => {
+    setLoading(true);
     fetcher.get('/review').then((res) => {
       // console.log(res.data);
       setReviews(res.data);
+      setLoading(false);
     });
   }, []);
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   const lastReviews = reviews.slice(-6);
 

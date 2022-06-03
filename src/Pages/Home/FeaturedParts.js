@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import PartCard from '../../Component/PartCard';
+import Spinner from '../../Component/Spinner';
 
 const FeaturedParts = () => {
   const [parts, setParts] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     fetch('https://lamps-manufacturer.herokuapp.com/parts')
       .then((res) => res.json())
-      .then((data) => setParts(data));
+      .then((data) => {
+        setParts(data);
+        setLoading(false);
+      });
   }, []);
+
   // console.log(parts);
+
+  if (loading) {
+    return <Spinner />;
+  }
   return (
     <>
-      <div className="container my-12 mx-auto px-5 md:px-12">
+      <div id="featuredParts" className="container my-12 mx-auto px-5 md:px-12">
         <h1 className="uppercase text-center text-3xl font-bold mb-8">
           Our Featured Lamp's Parts
           <br />

@@ -40,13 +40,14 @@ const Banner = () => {
               We manufacture and sell the best quality lamps parts in the world.
               We are the best in the world.
             </p>
-            <span
+            <a
               data-aos="zoom-in"
               data-aos-delay="1300"
+              href="home#featuredParts"
               className=" bg-primary py-4 px-12 rounded text-white"
             >
               Explore The Website
-            </span>
+            </a>
           </div>
         </div>
       </div>
