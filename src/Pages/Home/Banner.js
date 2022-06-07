@@ -43,7 +43,7 @@ const Banner = () => {
             <a
               data-aos="zoom-in"
               data-aos-delay="1300"
-              href="home#featuredParts"
+              href="#featuredParts"
               className=" bg-primary py-4 px-12 rounded text-white"
             >
               Explore The Website
